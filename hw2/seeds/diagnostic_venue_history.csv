@@ -1,0 +1,3 @@
+source_system,place_id,place_title,valid_from,valid_to
+synthetic_history,100,Тестовая площадка,2026-01-01 00:00:00,2026-06-01 00:00:00
+synthetic_history,100,Тестовая площадка после переименования,2026-06-01 00:00:00,

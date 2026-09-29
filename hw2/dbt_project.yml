@@ -1,0 +1,23 @@
+name: kudago_spb
+version: 1.0.0
+config-version: 2
+profile: kudago_spb
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  kudago_spb:
+    +materialized: table
+    staging:
+      +materialized: view
+
+seeds:
+  kudago_spb:
+    diagnostic_venue_history:
+      +schema: diagnostic
+      +column_types:
+        valid_from: timestamp
+        valid_to: timestamp

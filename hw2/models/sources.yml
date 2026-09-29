@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: kudago_events
+        columns:
+          - name: source_system
+            tests: [not_null]
+          - name: event_id
+            tests: [not_null]
+          - name: payload
+            tests: [not_null]

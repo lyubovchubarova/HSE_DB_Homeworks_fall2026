@@ -1,0 +1,35 @@
+{
+  "duplicate": {
+    "prediction": "duplicate does not multiply facts",
+    "observed": 1267,
+    "passed": true
+  },
+  "late_correction": {
+    "prediction": "same business key is updated, not duplicated",
+    "before_minutes": 180.0,
+    "after_minutes": 240.0,
+    "passed": true
+  },
+  "second_source": {
+    "prediction": "equal local IDs from two sources stay separate",
+    "observed_sources": 2,
+    "passed": true
+  },
+  "history_overlap": {
+    "prediction": "overlap test fails",
+    "dbt_exit_code": 1,
+    "passed": true
+  },
+  "repeat_run": {
+    "first_hash": "b93c71dd8c6f17966bb12f67e190d978",
+    "second_hash": "b93c71dd8c6f17966bb12f67e190d978",
+    "passed": true
+  },
+  "failed_quality_keeps_public": {
+    "dbt_exit_code": 1,
+    "before_hash": "b93c71dd8c6f17966bb12f67e190d978",
+    "after_hash": "b93c71dd8c6f17966bb12f67e190d978",
+    "passed": true
+  },
+  "all_passed": true
+}
