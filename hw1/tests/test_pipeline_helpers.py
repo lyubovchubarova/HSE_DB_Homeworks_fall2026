@@ -4,7 +4,12 @@ from urllib.parse import urlencode
 
 import pytest
 
-from hw1.pipeline import build_source_url, normalize_open_meteo_csv
+from hw1.pipeline import (
+    benchmark_format_order,
+    build_city_dimensions,
+    build_source_url,
+    normalize_open_meteo_csv,
+)
 
 
 METADATA_HEADER = (
@@ -102,3 +107,62 @@ def test_normalize_open_meteo_csv_rejects_invalid_sections(
 def test_normalize_open_meteo_csv_decodes_strict_utf8() -> None:
     with pytest.raises(UnicodeDecodeError):
         normalize_open_meteo_csv(_valid_csv() + b"\xff")
+
+
+def test_build_city_dimensions_maps_metadata_to_city_order() -> None:
+    _, metadata, _ = normalize_open_meteo_csv(_valid_csv())
+
+    dimensions = build_city_dimensions(metadata)
+
+    assert dimensions == [
+        {
+            "location_id": 0,
+            "city": "Москва",
+            "timezone": "Europe/Moscow",
+        },
+        {
+            "location_id": 1,
+            "city": "Санкт-Петербург",
+            "timezone": "Europe/Moscow",
+        },
+        {
+            "location_id": 2,
+            "city": "Екатеринбург",
+            "timezone": "Asia/Yekaterinburg",
+        },
+        {
+            "location_id": 3,
+            "city": "Новосибирск",
+            "timezone": "Asia/Novosibirsk",
+        },
+        {
+            "location_id": 4,
+            "city": "Сочи",
+            "timezone": "Europe/Moscow",
+        },
+    ]
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    [
+        (lambda rows: rows.pop(), "exactly 5"),
+        (lambda rows: rows[2].update(location_id="7"), "location_id"),
+        (lambda rows: rows[2].update(location_id="not-an-int"), "location_id"),
+        (lambda rows: rows[2].update(timezone="  "), "timezone"),
+    ],
+)
+def test_build_city_dimensions_rejects_invalid_metadata(
+    mutate, message: str
+) -> None:
+    _, metadata, _ = normalize_open_meteo_csv(_valid_csv())
+    mutate(metadata)
+
+    with pytest.raises(ValueError, match=message):
+        build_city_dimensions(metadata)
+
+
+def test_benchmark_format_order_alternates_by_trial() -> None:
+    assert benchmark_format_order(1) == ("CSV", "Parquet")
+    assert benchmark_format_order(2) == ("Parquet", "CSV")
+    assert benchmark_format_order(3) == ("CSV", "Parquet")
