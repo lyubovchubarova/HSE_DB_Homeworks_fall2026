@@ -5,7 +5,10 @@ from urllib.parse import urlencode
 import pytest
 
 from hw1.pipeline import (
+    BATCH_BOUNDARY,
+    analytical_aggregation_sql,
     benchmark_format_order,
+    batch_predicates,
     build_city_dimensions,
     build_source_url,
     normalize_open_meteo_csv,
@@ -166,3 +169,22 @@ def test_benchmark_format_order_alternates_by_trial() -> None:
     assert benchmark_format_order(1) == ("CSV", "Parquet")
     assert benchmark_format_order(2) == ("Parquet", "CSV")
     assert benchmark_format_order(3) == ("CSV", "Parquet")
+
+
+def test_batch_predicates_are_complementary_timestamp_ntz_ranges() -> None:
+    assert BATCH_BOUNDARY == "2024-01-01"
+    assert batch_predicates() == (
+        "observed_at < TIMESTAMP_NTZ '2024-01-01 00:00:00'",
+        "observed_at >= TIMESTAMP_NTZ '2024-01-01 00:00:00'",
+    )
+
+
+def test_analytical_aggregation_sql_is_deterministically_ordered() -> None:
+    assert analytical_aggregation_sql("source_view") == (
+        "SELECT city, month, hour,\n"
+        "       count(*) AS observations,\n"
+        "       avg(temperature_c) AS average_temperature_c\n"
+        "FROM source_view\n"
+        "GROUP BY city, month, hour\n"
+        "ORDER BY city, month, hour"
+    )
