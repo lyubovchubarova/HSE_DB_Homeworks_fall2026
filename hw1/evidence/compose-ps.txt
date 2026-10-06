@@ -1,6 +1,6 @@
 NAME                                 IMAGE                                      COMMAND                  SERVICE      CREATED          STATUS                      PORTS
-hse-lakehouse-student-minio-1        minio/minio:RELEASE.2025-09-07T16-13-09Z   "/usr/bin/docker-ent…"   minio        23 seconds ago   Up 22 seconds (healthy)     127.0.0.1:9000-9001->9000-9001/tcp
-hse-lakehouse-student-minio-init-1   minio/mc:latest                            "/bin/sh -c ' mc ali…"   minio-init   22 seconds ago   Exited (0) 16 seconds ago   
-hse-lakehouse-student-postgres-1     postgres:16-alpine                         "docker-entrypoint.s…"   postgres     23 seconds ago   Up 21 seconds (healthy)     5432/tcp
-hse-lakehouse-student-spark-1        hse-lakehouse-student-spark                "sleep infinity"         spark        22 seconds ago   Up 16 seconds               127.0.0.1:4040->4040/tcp
-hse-lakehouse-student-trino-1        hse-lakehouse-student-trino                "/usr/lib/trino/bin/…"   trino        22 seconds ago   Up 16 seconds (healthy)     127.0.0.1:8088->8080/tcp
+hse-lakehouse-student-minio-1        minio/minio:RELEASE.2025-09-07T16-13-09Z   "/usr/bin/docker-ent…"   minio        50 minutes ago   Up 50 minutes (healthy)     127.0.0.1:9000-9001->9000-9001/tcp
+hse-lakehouse-student-minio-init-1   minio/mc:latest                            "/bin/sh -c ' mc ali…"   minio-init   50 minutes ago   Exited (0) 50 minutes ago
+hse-lakehouse-student-postgres-1     postgres:16-alpine                         "docker-entrypoint.s…"   postgres     50 minutes ago   Up 50 minutes (healthy)     5432/tcp
+hse-lakehouse-student-spark-1        hse-lakehouse-student-spark                "sleep infinity"         spark        50 minutes ago   Up 50 minutes               127.0.0.1:4040->4040/tcp
+hse-lakehouse-student-trino-1        hse-lakehouse-student-trino                "/usr/lib/trino/bin/…"   trino        50 minutes ago   Up 50 minutes (healthy)     127.0.0.1:8088->8080/tcp

@@ -1,3 +1,1 @@
-Object URI: s3://raw/student_01/open_meteo/ingestion_date=2026-10-06/source.csv
-Command: mc stat --json local/raw/student_01/open_meteo/ingestion_date=2026-10-06/source.csv
-{"status":"success","name":"source.csv","lastModified":"2026-10-06T14:30:51Z","size":7317887,"etag":"db63cf5db680e3186642dd705b365911","type":"file","metadata":{"Content-Type":"binary/octet-stream"},"checksum":{"CRC32":"iJLK0A=="}}
+{"status":"success","name":"source.csv","lastModified":"2026-10-06T15:19:00Z","size":7317887,"etag":"db63cf5db680e3186642dd705b365911","type":"file","metadata":{"Content-Type":"binary/octet-stream"},"checksum":{"CRC32":"iJLK0A=="}}
