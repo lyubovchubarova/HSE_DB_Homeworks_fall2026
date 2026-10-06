@@ -9,7 +9,15 @@ from pathlib import Path
 HW1 = Path(__file__).resolve().parents[1]
 QUERIES_PATH = HW1 / "queries.sql"
 SCHEMA_PATH = HW1 / "schema.md"
+README_PATH = HW1 / "README.md"
+REPORT_PATH = HW1 / "report.md"
 FORBIDDEN_TEACHING_IDENTIFIERS = ("events_demo", "dwh.events", "price_rub")
+EVIDENCE_FILES = (
+    "compose-ps.txt",
+    "object-listing.txt",
+    "spark-result.txt",
+    "trino-result.txt",
+)
 EXPECTED_FIELDS = (
     "location_id",
     "city",
@@ -60,6 +68,13 @@ def _schema_rows(schema: str) -> dict[str, list[str]]:
             cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
             rows[cells[0].strip("`")] = cells
     return rows
+
+
+def _markdown_headings(markdown: str) -> tuple[str, ...]:
+    return tuple(
+        match.group(1).strip().lower()
+        for match in re.finditer(r"^#{1,6}\s+(.+?)\s*$", markdown, re.MULTILINE)
+    )
 
 
 def test_sql_comment_stripping_excludes_non_executable_clauses() -> None:
@@ -231,3 +246,86 @@ def test_deliverables_do_not_reuse_teaching_dataset_identifiers() -> None:
 
     for identifier in FORBIDDEN_TEACHING_IDENTIFIERS:
         assert identifier not in combined
+
+
+def test_readme_has_reproduction_safety_and_submission_sections() -> None:
+    readme = _required_text(README_PATH)
+    lowered = readme.lower()
+    headings = _markdown_headings(readme)
+
+    for topic in (
+        "назначение",
+        "структура",
+        "требования",
+        "учебный этап",
+        "воспроизведение",
+        "повторный запуск",
+        "безопасность",
+        "доказательства",
+    ):
+        assert any(topic in heading for heading in headings), (
+            f"README heading must cover {topic!r}"
+        )
+    for command in (
+        "python3 generate_dataset.py --rows 200000 --out data/events_demo.csv",
+        "docker-compose exec -T spark spark-submit /scripts/01_upload_csv.py "
+        "/data/events_demo.csv",
+        "docker-compose exec -T spark spark-submit /scripts/02_csv_to_parquet.py",
+        "docker-compose exec -T spark spark-submit /scripts/03_iceberg.py",
+        "docker-compose exec -T trino trino < trino/scripts/seminar_demo.sql",
+    ):
+        assert command in readme
+    for concept in (
+        "hw1_dir=/absolute/path/to/hw1",
+        "infra_dir=/absolute/path/to/student-1/infra",
+        "set -o pipefail",
+        "docker compose",
+        "docker-compose",
+        "docker-compose down",
+        "down -v",
+        "127.0.0.1",
+    ):
+        assert concept in lowered
+
+
+def test_report_has_required_analysis_sections_and_evidence_links() -> None:
+    report = _required_text(REPORT_PATH)
+    lowered = report.lower()
+    headings = _markdown_headings(report)
+
+    for topic in (
+        "паспорт",
+        "raw",
+        "схема",
+        "качество",
+        "формат",
+        "партиц",
+        "iceberg",
+        "spark",
+        "федерац",
+        "исследователь",
+        "ограничения",
+        "архитектур",
+        "доказательства",
+        "чек-лист",
+    ):
+        assert any(topic in heading for heading in headings), (
+            f"report heading must cover {topic!r}"
+        )
+    for evidence_file in EVIDENCE_FILES:
+        assert f"evidence/{evidence_file}" in report
+    assert "(schema.md)" in lowered
+    assert "open-meteo.com/en/docs/historical-weather-api" in lowered
+    assert "open-meteo.com/en/licence" in lowered
+
+
+def test_submission_docs_have_no_placeholders_or_absolute_user_path() -> None:
+    combined = _required_text(README_PATH) + "\n" + _required_text(REPORT_PATH)
+    lowered = combined.lower()
+    placeholders = ("to" + "do", "tb" + "d", "fix" + "me")
+
+    assert not re.search(
+        rf"\b(?:{'|'.join(placeholders)})\b",
+        lowered,
+    )
+    assert "/users/lyubachuba/" not in lowered
