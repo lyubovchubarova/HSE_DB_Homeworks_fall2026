@@ -1,0 +1,4 @@
+clickhouse-connect==0.8.18
+Pillow==11.1.0
+psycopg2-binary==2.9.10
+requests==2.32.3

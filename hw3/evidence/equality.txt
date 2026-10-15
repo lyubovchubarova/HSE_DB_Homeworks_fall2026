@@ -1,0 +1,10 @@
+ indexed_differences | partitioned_differences 
+---------------------+-------------------------
+                   0 |                       0
+(1 row)
+
+ rows | unique_keys | unique_business_keys | snapshot_min | snapshot_max 
+------+-------------+----------------------+--------------+--------------
+ 1000 |        1000 |                 1000 | 2026-10-06   | 2026-10-06
+(1 row)
+

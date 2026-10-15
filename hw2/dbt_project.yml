@@ -1,23 +1,14 @@
-name: kudago_spb
+name: vacancy_dwh
 version: 1.0.0
 config-version: 2
-profile: kudago_spb
+profile: vacancy_dwh
 
 model-paths: ["models"]
-seed-paths: ["seeds"]
 test-paths: ["tests"]
 clean-targets: ["target", "dbt_packages"]
 
 models:
-  kudago_spb:
+  vacancy_dwh:
     +materialized: table
     staging:
       +materialized: view
-
-seeds:
-  kudago_spb:
-    diagnostic_venue_history:
-      +schema: diagnostic
-      +column_types:
-        valid_from: timestamp
-        valid_to: timestamp

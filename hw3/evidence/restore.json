@@ -1,0 +1,488 @@
+{
+  "evidence_contract": "hw3-vacancy-mart-v1",
+  "leader": "pg1",
+  "pg_dump_version": "pg_dump (PostgreSQL) 14.18 (Homebrew)",
+  "pg_restore_version": "pg_restore (PostgreSQL) 14.18 (Homebrew)",
+  "format": "PostgreSQL custom (-Fc)",
+  "backup_file": "evidence/backup/hw3.dump",
+  "backup_bytes": 16068071,
+  "dump": {
+    "command": "/opt/homebrew/opt/postgresql@14/bin/pg_dump -h 127.0.0.1 -p 55441 -U postgres -d hw3 -Fc --no-owner --no-privileges -f /Users/lyubachuba/HSE_DB_Homeworks_fall2026/hw3/evidence/backup/hw3.dump",
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "restore": {
+    "command": "/opt/homebrew/opt/postgresql@14/bin/pg_restore -h 127.0.0.1 -p 55441 -U postgres -d hw3_restore --exit-on-error --no-owner --no-privileges /Users/lyubachuba/HSE_DB_Homeworks_fall2026/hw3/evidence/backup/hw3.dump",
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "source": {
+    "tables": [
+      [
+        "admin",
+        "replication_markers"
+      ],
+      [
+        "benchmark",
+        "vacancies_base"
+      ],
+      [
+        "benchmark",
+        "vacancies_indexed"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned_2026"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned_default"
+      ],
+      [
+        "control",
+        "vacancies"
+      ]
+    ],
+    "indexes": [
+      [
+        "admin",
+        "replication_markers",
+        "replication_markers_pkey",
+        "CREATE UNIQUE INDEX replication_markers_pkey ON admin.replication_markers USING btree (marker)"
+      ],
+      [
+        "benchmark",
+        "vacancies_indexed",
+        "vacancies_indexed_region_sphere_creation_idx",
+        "CREATE INDEX vacancies_indexed_region_sphere_creation_idx ON benchmark.vacancies_indexed USING btree (region_code, sphere_name, creation_date)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_pkey",
+        "CREATE UNIQUE INDEX vacancies_pkey ON control.vacancies USING btree (vacancy_snapshot_key)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_snapshot_date_vacancy_id_key",
+        "CREATE UNIQUE INDEX vacancies_snapshot_date_vacancy_id_key ON control.vacancies USING btree (snapshot_date, vacancy_id)"
+      ]
+    ],
+    "constraints": [
+      [
+        "admin",
+        "replication_markers",
+        "replication_markers_pkey",
+        "p",
+        "PRIMARY KEY (marker)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_check",
+        "c",
+        "CHECK (((salary_min IS NULL) OR (salary_max IS NULL) OR (salary_min <= salary_max)))"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_pkey",
+        "p",
+        "PRIMARY KEY (vacancy_snapshot_key)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_snapshot_date_vacancy_id_key",
+        "u",
+        "UNIQUE (snapshot_date, vacancy_id)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_work_places_check",
+        "c",
+        "CHECK ((work_places > 0))"
+      ]
+    ],
+    "partition_bounds": [
+      [
+        "benchmark",
+        "vacancies_partitioned_2026",
+        "FOR VALUES FROM ('2026-01-01') TO ('2027-01-01')"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned_default",
+        "DEFAULT"
+      ]
+    ],
+    "vacancy_columns": {
+      "control.vacancies": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ],
+      "benchmark.vacancies_base": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ],
+      "benchmark.vacancies_indexed": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ],
+      "benchmark.vacancies_partitioned": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ]
+    },
+    "relations": {
+      "control.vacancies": {
+        "rows": 1000,
+        "filled_keys": 1000,
+        "unique_keys": 1000,
+        "unique_business_keys": 1000,
+        "invalid_rows": 0
+      },
+      "benchmark.vacancies_base": {
+        "rows": 51210,
+        "filled_keys": 51210,
+        "unique_keys": 51210,
+        "unique_business_keys": 51210,
+        "invalid_rows": 0
+      },
+      "benchmark.vacancies_indexed": {
+        "rows": 51210,
+        "filled_keys": 51210,
+        "unique_keys": 51210,
+        "unique_business_keys": 51210,
+        "invalid_rows": 0
+      },
+      "benchmark.vacancies_partitioned": {
+        "rows": 51210,
+        "filled_keys": 51210,
+        "unique_keys": 51210,
+        "unique_business_keys": 51210,
+        "invalid_rows": 0
+      }
+    },
+    "control_sha256": "f0b9f9f7c7b96133328f6db3d1d3d4da590038e9a92d3c51d72006f6fa7ef88f",
+    "control_rows": 1000,
+    "report": {
+      "rows": 34,
+      "sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30"
+    }
+  },
+  "restored": {
+    "tables": [
+      [
+        "admin",
+        "replication_markers"
+      ],
+      [
+        "benchmark",
+        "vacancies_base"
+      ],
+      [
+        "benchmark",
+        "vacancies_indexed"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned_2026"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned_default"
+      ],
+      [
+        "control",
+        "vacancies"
+      ]
+    ],
+    "indexes": [
+      [
+        "admin",
+        "replication_markers",
+        "replication_markers_pkey",
+        "CREATE UNIQUE INDEX replication_markers_pkey ON admin.replication_markers USING btree (marker)"
+      ],
+      [
+        "benchmark",
+        "vacancies_indexed",
+        "vacancies_indexed_region_sphere_creation_idx",
+        "CREATE INDEX vacancies_indexed_region_sphere_creation_idx ON benchmark.vacancies_indexed USING btree (region_code, sphere_name, creation_date)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_pkey",
+        "CREATE UNIQUE INDEX vacancies_pkey ON control.vacancies USING btree (vacancy_snapshot_key)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_snapshot_date_vacancy_id_key",
+        "CREATE UNIQUE INDEX vacancies_snapshot_date_vacancy_id_key ON control.vacancies USING btree (snapshot_date, vacancy_id)"
+      ]
+    ],
+    "constraints": [
+      [
+        "admin",
+        "replication_markers",
+        "replication_markers_pkey",
+        "p",
+        "PRIMARY KEY (marker)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_check",
+        "c",
+        "CHECK (((salary_min IS NULL) OR (salary_max IS NULL) OR (salary_min <= salary_max)))"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_pkey",
+        "p",
+        "PRIMARY KEY (vacancy_snapshot_key)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_snapshot_date_vacancy_id_key",
+        "u",
+        "UNIQUE (snapshot_date, vacancy_id)"
+      ],
+      [
+        "control",
+        "vacancies",
+        "vacancies_work_places_check",
+        "c",
+        "CHECK ((work_places > 0))"
+      ]
+    ],
+    "partition_bounds": [
+      [
+        "benchmark",
+        "vacancies_partitioned_2026",
+        "FOR VALUES FROM ('2026-01-01') TO ('2027-01-01')"
+      ],
+      [
+        "benchmark",
+        "vacancies_partitioned_default",
+        "DEFAULT"
+      ]
+    ],
+    "vacancy_columns": {
+      "control.vacancies": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ],
+      "benchmark.vacancies_base": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ],
+      "benchmark.vacancies_indexed": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ],
+      "benchmark.vacancies_partitioned": [
+        "vacancy_snapshot_key",
+        "snapshot_date",
+        "vacancy_id",
+        "region_code",
+        "region_name",
+        "federal_district",
+        "sphere_name",
+        "creation_date",
+        "modified_at",
+        "job_name",
+        "salary_min",
+        "salary_max",
+        "currency",
+        "employment",
+        "schedule",
+        "education",
+        "experience_years",
+        "work_places",
+        "is_quota",
+        "is_special_workplace"
+      ]
+    },
+    "relations": {
+      "control.vacancies": {
+        "rows": 1000,
+        "filled_keys": 1000,
+        "unique_keys": 1000,
+        "unique_business_keys": 1000,
+        "invalid_rows": 0
+      },
+      "benchmark.vacancies_base": {
+        "rows": 51210,
+        "filled_keys": 51210,
+        "unique_keys": 51210,
+        "unique_business_keys": 51210,
+        "invalid_rows": 0
+      },
+      "benchmark.vacancies_indexed": {
+        "rows": 51210,
+        "filled_keys": 51210,
+        "unique_keys": 51210,
+        "unique_business_keys": 51210,
+        "invalid_rows": 0
+      },
+      "benchmark.vacancies_partitioned": {
+        "rows": 51210,
+        "filled_keys": 51210,
+        "unique_keys": 51210,
+        "unique_business_keys": 51210,
+        "invalid_rows": 0
+      }
+    },
+    "control_sha256": "f0b9f9f7c7b96133328f6db3d1d3d4da590038e9a92d3c51d72006f6fa7ef88f",
+    "control_rows": 1000,
+    "report": {
+      "rows": 34,
+      "sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30"
+    }
+  },
+  "all_checks_equal": true
+}

@@ -1,0 +1,27 @@
+{
+  "leader": "pg2",
+  "replica": "pg1",
+  "control_rows": 1000,
+  "base_rows": 51210,
+  "indexed_rows": 51210,
+  "partitioned_rows": 51210,
+  "snapshot_min": "2026-10-06",
+  "snapshot_max": "2026-10-06",
+  "unique_keys": 51210,
+  "unique_business_keys": 51210,
+  "relation_bytes": {
+    "vacancies": 761856,
+    "vacancies_base": 26705920,
+    "vacancies_indexed": 28852224,
+    "vacancies_partitioned_2026": 26705920,
+    "vacancies_partitioned_default": 8192
+  },
+  "source_metadata": {
+    "source": "Работа России",
+    "snapshot_date": "2026-10-06",
+    "rows": 51210,
+    "regions": 8,
+    "spheres": 36,
+    "csv_sha256": "8f1e0e53caf50ed98f2544bab23f9f18c239e994fe54bef1baef1a23ec6c839a"
+  }
+}

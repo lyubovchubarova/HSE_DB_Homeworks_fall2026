@@ -4,11 +4,11 @@ sources:
   - name: raw
     schema: raw
     tables:
-      - name: kudago_events
+      - name: trudvsem_vacancies
         columns:
-          - name: source_system
+          - name: snapshot_date
             tests: [not_null]
-          - name: event_id
+          - name: vacancy_id
             tests: [not_null]
           - name: payload
             tests: [not_null]

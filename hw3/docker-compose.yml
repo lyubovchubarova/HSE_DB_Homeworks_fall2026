@@ -1,0 +1,72 @@
+services:
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.17
+    command:
+      - /usr/local/bin/etcd
+      - --name=etcd1
+      - --data-dir=/etcd-data
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --advertise-client-urls=http://etcd:2379
+    volumes:
+      - etcd_data:/etcd-data
+    healthcheck:
+      test:
+        - CMD
+        - /usr/local/bin/etcdctl
+        - --endpoints=http://127.0.0.1:2379
+        - endpoint
+        - health
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    mem_limit: 512m
+    cpus: 0.5
+
+  patroni1:
+    build:
+      context: docker
+    command: /etc/patroni/node.yml
+    volumes:
+      - patroni1_data:/var/lib/postgresql/data
+      - ./patroni/node1.yml:/etc/patroni/node.yml:ro
+    ports:
+      - "127.0.0.1:55441:5432"
+      - "127.0.0.1:8008:8008"
+    depends_on:
+      etcd:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8008/patroni"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    shm_size: 256m
+    mem_limit: 2g
+    cpus: 1.5
+
+  patroni2:
+    build:
+      context: docker
+    command: /etc/patroni/node.yml
+    volumes:
+      - patroni2_data:/var/lib/postgresql/data
+      - ./patroni/node2.yml:/etc/patroni/node.yml:ro
+    ports:
+      - "127.0.0.1:55442:5432"
+      - "127.0.0.1:8009:8008"
+    depends_on:
+      patroni1:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8008/patroni"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    shm_size: 256m
+    mem_limit: 2g
+    cpus: 1.5
+
+volumes:
+  etcd_data:
+  patroni1_data:
+  patroni2_data:

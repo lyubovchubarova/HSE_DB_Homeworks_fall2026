@@ -1,0 +1,48 @@
+{
+  "selective": {
+    "result_digest": "540698eafb771ee90b0e8cb5627b4611174c8422a339c607d15e2807eddecac2",
+    "systems": {
+      "postgres": {
+        "runs": 5,
+        "median_ms": 0.572,
+        "min_ms": 0.533,
+        "max_ms": 0.617
+      },
+      "clickhouse_region": {
+        "runs": 5,
+        "median_ms": 3.634,
+        "min_ms": 2.881,
+        "max_ms": 3.725
+      },
+      "clickhouse_date": {
+        "runs": 5,
+        "median_ms": 3.286,
+        "min_ms": 3.137,
+        "max_ms": 3.653
+      }
+    }
+  },
+  "wide": {
+    "result_digest": "dfe6111d79700a02735fddb938e0b451e68397f711698aa9c5f65e2828bba8c4",
+    "systems": {
+      "postgres": {
+        "runs": 5,
+        "median_ms": 9.345,
+        "min_ms": 9.261,
+        "max_ms": 9.577
+      },
+      "clickhouse_region": {
+        "runs": 5,
+        "median_ms": 4.451,
+        "min_ms": 4.26,
+        "max_ms": 4.624
+      },
+      "clickhouse_date": {
+        "runs": 5,
+        "median_ms": 4.089,
+        "min_ms": 3.863,
+        "max_ms": 4.259
+      }
+    }
+  }
+}

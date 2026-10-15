@@ -5,60 +5,46 @@ models:
     columns:
       - name: date_key
         tests: [not_null, unique]
-  - name: dim_category
+  - name: dim_region
     columns:
-      - name: category_key
+      - name: region_key
         tests: [not_null, unique]
-      - name: category_slug
-        tests:
-          - not_null
-          - accepted_values:
-              values:
-                - cinema
-                - concert
-                - education
-                - entertainment
-                - exhibition
-                - festival
-                - holiday
-                - kids
-                - other
-                - party
-                - social-activity
-                - stock
-                - theater
-                - tour
-                - unknown
-  - name: dim_place
+      - name: region_code
+        tests: [not_null, unique]
+  - name: dim_sphere
     columns:
-      - name: place_key
+      - name: sphere_key
         tests: [not_null, unique]
-  - name: fct_event_occurrence
+      - name: sphere_name
+        tests: [not_null, unique]
+  - name: fct_vacancies
     columns:
-      - name: event_occurrence_key
+      - name: vacancy_snapshot_key
         tests: [not_null, unique]
-      - name: event_title
-        tests: [not_null]
-      - name: source_system
-        tests:
-          - accepted_values:
-              values: [kudago, partner_test]
-      - name: date_key
+      - name: snapshot_date_key
         tests:
           - relationships:
               to: ref('dim_date')
               field: date_key
-      - name: category_key
+      - name: region_key
         tests:
           - relationships:
-              to: ref('dim_category')
-              field: category_key
-      - name: place_key
+              to: ref('dim_region')
+              field: region_key
+      - name: sphere_key
         tests:
           - relationships:
-              to: ref('dim_place')
-              field: place_key
-  - name: mart_daily_events
+              to: ref('dim_sphere')
+              field: sphere_key
+      - name: vacancy_id
+        tests: [not_null]
+  - name: mart_regional_sphere_demand
     columns:
-      - name: mart_key
-        tests: [not_null, unique]
+      - name: snapshot_date
+        tests: [not_null]
+      - name: region_code
+        tests: [not_null]
+      - name: sphere_name
+        tests: [not_null]
+      - name: vacancy_count
+        tests: [not_null]

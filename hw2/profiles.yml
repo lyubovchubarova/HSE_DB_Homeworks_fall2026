@@ -1,4 +1,4 @@
-kudago_spb:
+vacancy_dwh:
   target: local
   outputs:
     local:
@@ -7,6 +7,6 @@ kudago_spb:
       port: 55432
       user: "{{ env_var('PGUSER', 'postgres') }}"
       password: "{{ env_var('PGPASSWORD', '') }}"
-      dbname: "{{ env_var('PGDATABASE', 'kudago_dwh') }}"
+      dbname: "{{ env_var('PGDATABASE', 'vacancy_dwh') }}"
       schema: analytics_candidate
-      threads: 2
+      threads: 4

@@ -1,0 +1,44 @@
+{
+  "initial_groups": 275,
+  "final_groups": 373,
+  "initial_digest": "8565eeed6145bbb1abe4acd1d662fa2478eb3924643c971ac7e4adacb367155c",
+  "initial_direct_digest": "8565eeed6145bbb1abe4acd1d662fa2478eb3924643c971ac7e4adacb367155c",
+  "final_digest": "f5d8a117e8d785f53492398cc3dec90bf21a5d6a136747e53a0c3dc3e3127626",
+  "final_direct_digest": "f5d8a117e8d785f53492398cc3dec90bf21a5d6a136747e53a0c3dc3e3127626",
+  "initial_matches_direct": true,
+  "final_matches_direct": true,
+  "initial_totals": {
+    "vacancy_count": 51210,
+    "workplace_count": 143168,
+    "salary_min_sum": "2558138444",
+    "salary_min_count": 51210,
+    "average_salary_min": "49953.88486623706307361843390"
+  },
+  "final_totals": {
+    "vacancy_count": 59795,
+    "workplace_count": 169698,
+    "salary_min_sum": "3036212494",
+    "salary_min_count": 59795,
+    "average_salary_min": "50777.02975165147587590935697"
+  },
+  "split_batch_probe": {
+    "insert_blocks": 2,
+    "partial_rows": 2,
+    "contains_null_salary": true,
+    "result": {
+      "vacancy_count": 3,
+      "workplace_count": 4,
+      "salary_min_sum": "600.00",
+      "salary_min_count": 2,
+      "average_salary_min": "300.00"
+    },
+    "expected": {
+      "vacancy_count": 3,
+      "workplace_count": 4,
+      "salary_min_sum": "600.00",
+      "salary_min_count": 2,
+      "average_salary_min": "300.00"
+    },
+    "matches_expected": true
+  }
+}

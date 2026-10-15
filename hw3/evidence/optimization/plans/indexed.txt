@@ -1,0 +1,18 @@
+Sort  (cost=3837.20..3837.29 rows=36 width=139) (actual time=4.851..4.852 rows=34 loops=1)
+  Sort Key: (count(*)) DESC, sphere_name
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=3171
+  ->  HashAggregate  (cost=3835.55..3836.27 rows=36 width=139) (actual time=4.829..4.843 rows=34 loops=1)
+        Group Key: sphere_name
+        Batches: 1  Memory Usage: 48kB
+        Buffers: shared hit=3171
+        ->  Bitmap Heap Scan on vacancies_indexed  (cost=305.14..3729.62 rows=8474 width=75) (actual time=0.615..2.753 rows=9193 loops=1)
+              Recheck Cond: ((region_code = '0200000000000'::text) AND (creation_date >= '2026-01-01'::date))
+              Filter: ((snapshot_date >= '2026-01-01'::date) AND (snapshot_date < '2027-01-01'::date))
+              Heap Blocks: exact=3132
+              Buffers: shared hit=3171
+              ->  Bitmap Index Scan on vacancies_indexed_region_sphere_creation_idx  (cost=0.00..303.03 rows=8474 width=0) (actual time=0.407..0.407 rows=9193 loops=1)
+                    Index Cond: ((region_code = '0200000000000'::text) AND (creation_date >= '2026-01-01'::date))
+                    Buffers: shared hit=39
+Planning Time: 0.043 ms
+Execution Time: 4.872 ms

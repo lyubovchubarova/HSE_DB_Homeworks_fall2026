@@ -1,0 +1,24 @@
+{
+  "contract": {
+    "initial_rows": 51210,
+    "new_rows": 8585,
+    "total_rows": 59795,
+    "unique_business_keys": 59795,
+    "snapshot_dates": [
+      "2026-10-06"
+    ]
+  },
+  "initial_counts": {
+    "postgres": 51210,
+    "vacancies_by_region": 51210,
+    "vacancies_by_date": 51210,
+    "vacancy_events": 51210
+  },
+  "final_counts": {
+    "postgres": 59795,
+    "vacancies_by_region": 59795,
+    "vacancies_by_date": 59795,
+    "vacancy_events": 59795
+  },
+  "new_rows_added": 8585
+}

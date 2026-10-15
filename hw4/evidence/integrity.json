@@ -1,0 +1,62 @@
+{
+  "raw": {
+    "stats": {
+      "postgres": {
+        "rows": 59795,
+        "unique_keys": 59795,
+        "work_places": 169698,
+        "min_date": "2015-08-06",
+        "max_date": "2026-10-06"
+      },
+      "clickhouse_region": {
+        "rows": 59795,
+        "unique_keys": 59795,
+        "work_places": 169698,
+        "min_date": "2015-08-06",
+        "max_date": "2026-10-06"
+      },
+      "clickhouse_date": {
+        "rows": 59795,
+        "unique_keys": 59795,
+        "work_places": 169698,
+        "min_date": "2015-08-06",
+        "max_date": "2026-10-06"
+      }
+    },
+    "digests": {
+      "postgres": "0e993b0a14c233bff6378230f9b0c97d31346f3f398241aa334fbc1445ec10ec",
+      "clickhouse_region": "0e993b0a14c233bff6378230f9b0c97d31346f3f398241aa334fbc1445ec10ec",
+      "clickhouse_date": "0e993b0a14c233bff6378230f9b0c97d31346f3f398241aa334fbc1445ec10ec"
+    },
+    "all_equal": true
+  },
+  "profiles": {
+    "selective": {
+      "rows": {
+        "postgres": 27,
+        "clickhouse_region": 27,
+        "clickhouse_date": 27
+      },
+      "digests": {
+        "postgres": "540698eafb771ee90b0e8cb5627b4611174c8422a339c607d15e2807eddecac2",
+        "clickhouse_region": "540698eafb771ee90b0e8cb5627b4611174c8422a339c607d15e2807eddecac2",
+        "clickhouse_date": "540698eafb771ee90b0e8cb5627b4611174c8422a339c607d15e2807eddecac2"
+      },
+      "all_equal": true
+    },
+    "wide": {
+      "rows": {
+        "postgres": 259,
+        "clickhouse_region": 259,
+        "clickhouse_date": 259
+      },
+      "digests": {
+        "postgres": "dfe6111d79700a02735fddb938e0b451e68397f711698aa9c5f65e2828bba8c4",
+        "clickhouse_region": "dfe6111d79700a02735fddb938e0b451e68397f711698aa9c5f65e2828bba8c4",
+        "clickhouse_date": "dfe6111d79700a02735fddb938e0b451e68397f711698aa9c5f65e2828bba8c4"
+      },
+      "all_equal": true
+    }
+  },
+  "all_equal": true
+}

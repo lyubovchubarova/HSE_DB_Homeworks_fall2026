@@ -1,0 +1,28 @@
+{
+  "leader": "pg1",
+  "isolation": {
+    "session1": "read committed",
+    "session2": "read committed"
+  },
+  "sessions": {
+    "session1_pid": 152,
+    "session2_pid": 154
+  },
+  "mvcc": {
+    "before_update": "committed-before",
+    "while_session1_uncommitted": "committed-before",
+    "after_session1_commit": "uncommitted-from-session-1",
+    "uncommitted_value_hidden": true,
+    "committed_value_visible": true
+  },
+  "lock": {
+    "waiting_pid": 154,
+    "wait_event_type": "Lock",
+    "wait_event": "transactionid",
+    "blocking_pids": [
+      152
+    ],
+    "session2_resumed_after_session1_rollback": true,
+    "both_lock_transactions_finished": true
+  }
+}

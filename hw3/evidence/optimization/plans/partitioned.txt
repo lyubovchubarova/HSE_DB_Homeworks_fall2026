@@ -1,0 +1,14 @@
+Sort  (cost=4384.50..4384.59 rows=36 width=139) (actual time=5.884..5.885 rows=34 loops=1)
+  Sort Key: (count(*)) DESC, vacancies_partitioned.sphere_name
+  Sort Method: quicksort  Memory: 31kB
+  Buffers: shared hit=3255
+  ->  HashAggregate  (cost=4382.85..4383.57 rows=36 width=139) (actual time=5.862..5.875 rows=34 loops=1)
+        Group Key: vacancies_partitioned.sphere_name
+        Batches: 1  Memory Usage: 48kB
+        Buffers: shared hit=3255
+        ->  Seq Scan on vacancies_partitioned_2026 vacancies_partitioned  (cost=0.00..4279.20 rows=8292 width=75) (actual time=0.005..4.530 rows=9193 loops=1)
+              Filter: ((snapshot_date >= '2026-01-01'::date) AND (snapshot_date < '2027-01-01'::date) AND (creation_date >= '2026-01-01'::date) AND (region_code = '0200000000000'::text))
+              Rows Removed by Filter: 42017
+              Buffers: shared hit=3255
+Planning Time: 0.068 ms
+Execution Time: 5.901 ms

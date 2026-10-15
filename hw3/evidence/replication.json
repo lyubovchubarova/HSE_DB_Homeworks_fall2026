@@ -1,0 +1,62 @@
+{
+  "before": {
+    "leader": {
+      "name": "pg2",
+      "patroni_role": "primary",
+      "pg_is_in_recovery": false,
+      "transaction_read_only": "off",
+      "database": "hw3",
+      "version": "PostgreSQL 14.18 (Debian 14.18-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+    },
+    "replica": {
+      "name": "pg1",
+      "patroni_role": "replica",
+      "pg_is_in_recovery": true,
+      "transaction_read_only": "on",
+      "database": "hw3",
+      "version": "PostgreSQL 14.18 (Debian 14.18-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+    },
+    "marker": "leader-to-replica-before-switchover",
+    "marker_visible_on_replica": true
+  },
+  "replica_write": {
+    "sqlstate": "25006",
+    "message": "ERROR:  cannot execute INSERT in a read-only transaction",
+    "marker_absent": true
+  },
+  "switchover": {
+    "http_status": 200,
+    "response": "Successfully switched over to \"pg1\"",
+    "old_leader": "pg2",
+    "new_leader": "pg1"
+  },
+  "after": {
+    "leader": {
+      "name": "pg1",
+      "patroni_role": "primary",
+      "pg_is_in_recovery": false,
+      "transaction_read_only": "off",
+      "database": "hw3",
+      "version": "PostgreSQL 14.18 (Debian 14.18-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+    },
+    "replica": {
+      "name": "pg2",
+      "patroni_role": "replica",
+      "pg_is_in_recovery": true,
+      "transaction_read_only": "on",
+      "database": "hw3",
+      "version": "PostgreSQL 14.18 (Debian 14.18-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+    },
+    "old_marker_present": true,
+    "new_marker": "leader-to-replica-after-switchover",
+    "new_marker_visible_on_replica": true,
+    "replication": [
+      {
+        "application_name": "pg2",
+        "state": "streaming",
+        "sync_state": "async",
+        "lag_bytes": 0
+      }
+    ]
+  }
+}

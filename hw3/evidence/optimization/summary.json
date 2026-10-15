@@ -1,0 +1,201 @@
+{
+  "measurement": {
+    "warmups": 1,
+    "measured_repeats": 5,
+    "time_source": "PostgreSQL EXPLAIN Execution Time"
+  },
+  "runs": [
+    {
+      "variant": "base",
+      "returned_rows": 34,
+      "result_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30",
+      "execution_times_ms": [
+        7.173,
+        7.392,
+        7.093,
+        7.143,
+        6.878
+      ],
+      "median_execution_ms": 7.143,
+      "measurements": [
+        {
+          "planning_ms": 0.057,
+          "execution_ms": 7.173,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.063,
+          "execution_ms": 7.392,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.052,
+          "execution_ms": 7.093,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.042,
+          "execution_ms": 7.143,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.073,
+          "execution_ms": 6.878,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        }
+      ]
+    },
+    {
+      "variant": "indexed",
+      "returned_rows": 34,
+      "result_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30",
+      "execution_times_ms": [
+        4.781,
+        5.808,
+        5.64,
+        5.274,
+        5.02
+      ],
+      "median_execution_ms": 5.274,
+      "measurements": [
+        {
+          "planning_ms": 0.066,
+          "execution_ms": 4.781,
+          "result_rows": 34,
+          "shared_hit_blocks": 3171,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.06,
+          "execution_ms": 5.808,
+          "result_rows": 34,
+          "shared_hit_blocks": 3171,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.059,
+          "execution_ms": 5.64,
+          "result_rows": 34,
+          "shared_hit_blocks": 3171,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.068,
+          "execution_ms": 5.274,
+          "result_rows": 34,
+          "shared_hit_blocks": 3171,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.049,
+          "execution_ms": 5.02,
+          "result_rows": 34,
+          "shared_hit_blocks": 3171,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        }
+      ]
+    },
+    {
+      "variant": "partitioned",
+      "returned_rows": 34,
+      "result_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30",
+      "execution_times_ms": [
+        6.068,
+        6.026,
+        6.192,
+        6.196,
+        6.314
+      ],
+      "median_execution_ms": 6.192,
+      "measurements": [
+        {
+          "planning_ms": 0.053,
+          "execution_ms": 6.068,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.085,
+          "execution_ms": 6.026,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.055,
+          "execution_ms": 6.192,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.071,
+          "execution_ms": 6.196,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        },
+        {
+          "planning_ms": 0.061,
+          "execution_ms": 6.314,
+          "result_rows": 34,
+          "shared_hit_blocks": 3255,
+          "shared_read_blocks": 0,
+          "temp_read_blocks": 0,
+          "temp_written_blocks": 0
+        }
+      ]
+    }
+  ],
+  "equality": {
+    "indexed": {
+      "equal": true,
+      "base_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30",
+      "variant_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30"
+    },
+    "partitioned": {
+      "equal": true,
+      "base_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30",
+      "variant_sha256": "bf362a65b75d65f042c326e4c44a1cbf2473797f37371ada0121bcfb72966b30"
+    }
+  }
+}

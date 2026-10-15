@@ -1,0 +1,27 @@
+{
+  "source": "Работа России",
+  "snapshot_date": "2026-10-06",
+  "initial_rows": 51210,
+  "new_rows": 8585,
+  "total_rows": 59795,
+  "unique_business_keys": 59795,
+  "snapshot_dates": [
+    "2026-10-06"
+  ],
+  "regions": {
+    "5700000000000": {
+      "name": "Орловская область",
+      "rows": 3334
+    },
+    "4900000000000": {
+      "name": "Магаданская область",
+      "rows": 1449
+    },
+    "6200000000000": {
+      "name": "Рязанская область",
+      "rows": 3802
+    }
+  },
+  "initial_sha256": "8f1e0e53caf50ed98f2544bab23f9f18c239e994fe54bef1baef1a23ec6c839a",
+  "new_batch_sha256": "d901591deca64e8d4410d72a0ed58d49e191fb11e8dbfb85ad15c23fe53c15d9"
+}
